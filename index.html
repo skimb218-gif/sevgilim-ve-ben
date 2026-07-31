@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="tr">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Sevgilime 💚</title>
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Segoe UI',Arial,sans-serif;
+}
+
+body{
+
+height:100vh;
+overflow:hidden;
+
+display:flex;
+justify-content:center;
+align-items:center;
+
+background:
+radial-gradient(circle at top,#397a4d,#092014);
+
+color:white;
+
+}
+
+
+/* ışık efekti */
+
+body::before{
+
+content:"";
+
+position:absolute;
+
+width:450px;
+height:450px;
+
+background:#75ff98;
+
+filter:blur(160px);
+
+opacity:.25;
+
+top:-150px;
+left:-150px;
+
+}
+
+
+/* ana kutu */
+
+.container{
+
+width:90%;
+max-width:450px;
+
+padding:40px 30px;
+
+text-align:center;
+
+background:rgba(255,255,255,.08);
+
+border:1px solid rgba(255,255,255,.2);
+
+backdrop-filter:blur(15px);
+
+border-radius:30px;
+
+box-shadow:0 0 40px rgba(0,0,0,.4);
+
+z-index:2;
+
+}
+
+
+h1{
+
+font-size:45px;
+
+color:#caffd5;
+
+margin-bottom:30px;
+
+}
+
+
+h2{
+
+font-size:20px;
+
+color:#b6ffc7;
+
+margin-top:20px;
+
+}
+
+
+.counter{
+
+display:grid;
+
+grid-template-columns:repeat(4,1fr);
+
+gap:10px;
+
+margin-top:15px;
+
+}
+
+
+.box{
+
+background:rgba(0,0,0,.25);
+
+padding:12px;
+
+border-radius:15px;
+
+}
+
+
+.number{
+
+font-size:25px;
+
+font-weight:bold;
+
+color:#8cffad;
+
+}
+
+
+.text{
+
+font-size:12px;
+
+opacity:.8;
+
+}
+
+
+.heart{
+
+position:absolute;
+
+bottom:-40px;
+
+color:#baffc9;
+
+animation:up linear forwards;
+
+z-index:1;
+
+}
+
+
+@keyframes up{
+
+0%{
+
+transform:translateY(0) rotate(0);
+
+opacity:0;
+
+}
+
+
+20%{
+
+opacity:1;
+
+}
+
+
+100%{
+
+transform:
+translateY(-120vh)
+rotate(360deg);
+
+opacity:0;
+
+}
+
+}
+
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<div class="container">
+
+
+<h1>Sevgilime 💚</h1>
+
+
+<h2>Tanışalı</h2>
+
+<div class="counter" id="love"></div>
+
+
+<h2>Son Buluşmamızın Üzerinden</h2>
+
+<div class="counter" id="meeting"></div>
+
+
+</div>
+
+
+
+<script>
+
+
+// Tanışma tarihi
+const startDate =
+new Date("2025-07-05T20:00:00");
+
+
+// Son buluşma tarihi
+const meetingDate =
+new Date("2026-07-28T11:00:00");
+
+
+
+function createCounter(element, date){
+
+
+const now=new Date();
+
+
+const difference =
+now-date;
+
+
+
+const days =
+Math.floor(
+difference/(1000*60*60*24)
+);
+
+
+const hours =
+Math.floor(
+(difference%(1000*60*60*24))
+/(1000*60*60)
+);
+
+
+const minutes =
+Math.floor(
+(difference%(1000*60*60))
+/(1000*60)
+);
+
+
+const seconds =
+Math.floor(
+(difference%(1000*60))
+/1000
+);
+
+
+
+element.innerHTML=`
+
+<div class="box">
+<div class="number">${days}</div>
+<div class="text">Gün</div>
+</div>
+
+<div class="box">
+<div class="number">${hours}</div>
+<div class="text">Saat</div>
+</div>
+
+<div class="box">
+<div class="number">${minutes}</div>
+<div class="text">Dakika</div>
+</div>
+
+<div class="box">
+<div class="number">${seconds}</div>
+<div class="text">Saniye</div>
+</div>
+
+`;
+
+}
+
+
+
+function update(){
+
+createCounter(
+document.getElementById("love"),
+startDate
+);
+
+
+createCounter(
+document.getElementById("meeting"),
+meetingDate
+);
+
+}
+
+
+setInterval(update,1000);
+
+update();
+
+
+
+// kalp oluşturma
+
+function heart(){
+
+const h=document.createElement("div");
+
+h.className="heart";
+
+h.innerHTML="💚";
+
+h.style.left=Math.random()*100+"vw";
+
+h.style.fontSize=
+(20+Math.random()*30)+"px";
+
+
+h.style.animationDuration=
+(5+Math.random()*5)+"s";
+
+
+document.body.appendChild(h);
+
+
+setTimeout(()=>{
+
+h.remove();
+
+},10000);
+
+
+}
+
+
+setInterval(heart,300);
+
+
+</script>
+
+
+</body>
+
+</html>
